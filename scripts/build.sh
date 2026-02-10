@@ -10,7 +10,9 @@ set -e
 BUILD_DIR="build"
 DIST_DIR="dist"
 APP_NAME="OpenCode Safari Extension"
-BUNDLE_ID="com.opencode.safari-extension"
+BUNDLE_ID="edu.ttu.spark.safari-opencode-extension"
+DEVELOPER_TEAM="sparK Innovation Lab"
+FUNDING_SOURCE="sparK Innovation Lab - TTU"
 MIN_MACOS_VERSION="11.0"
 MIN_SAFARI_VERSION="14.0"
 

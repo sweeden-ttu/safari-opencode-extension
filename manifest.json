@@ -3,8 +3,8 @@
   "name": "OpenCode Safari Extension",
   "version": "1.0.0",
   "description": "Enables AI agents to interact with web forms, download educational content, and process transcriptions through secure credential impersonation",
-  "author": "OpenCode Development Team",
-  "homepage_url": "https://github.com/opencode/safari-opencode-extension",
+  "author": "sparK Innovation Lab - Texas Tech University",
+  "homepage_url": "https://github.com/spark-ttu/safari-opencode-extension",
   
   "permissions": [
     "activeTab",           // Access current browser tab for form interaction
@@ -48,7 +48,9 @@
   
   "externally_connectable": {
     "matches": [
-      "https://*.canvas.instructure.com/*",  // Canvas LMS
+      "https://*.ttu.edu/*",                 // Texas Tech University domains
+      "https://engrmediasite.ttu.edu/*",     // TTU Engineering Mediasite
+      "https://canvas.instructure.com/*",    // Canvas LMS
       "https://*.blackboard.com/*",          // Blackboard Learn
       "https://*.moodle.org/*",              // Moodle
       "https://*.coursera.org/*",            // Coursera
@@ -56,5 +58,11 @@
       "https://*.udemy.com/*",               // Udemy
       "https://*.khanacademy.org/*"          // Khan Academy
     ]
+  },
+  
+  "minimum_chrome_version": "88",
+  "safari_settings": {
+    "minimum_safari_version": "14.0",
+    "minimum_macos_version": "11.0"
   }
 }

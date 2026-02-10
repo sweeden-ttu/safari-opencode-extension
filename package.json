@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "Safari extension enabling AI agents to interact with web content through secure credential impersonation and educational content processing",
   "main": "src/background.js",
-  "author": "OpenCode Development Team",
+  "author": "sparK Innovation Lab - Texas Tech University",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/opencode/safari-opencode-extension.git"
+    "url": "https://github.com/spark-ttu/safari-opencode-extension.git"
   },
   "keywords": [
     "safari-extension",
