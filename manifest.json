@@ -1,0 +1,36 @@
+{
+  "manifest_version": 2,
+  "name": "OpenCode Safari Extension",
+  "version": "1.0.0",
+  "description": "Allows OpenCode to interact with web forms and download course content",
+  
+  "permissions": [
+    "activeTab",
+    "storage",
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "https://*/*",
+    "http://*/*"
+  ],
+  
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["content.js"],
+    "run_at": "document_end"
+  }],
+  
+  "browser_action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "OpenCode Extension"
+  },
+  
+  "web_accessible_resources": [
+    "assets/*"
+  ]
+}

@@ -1,0 +1,52 @@
+name: Build Safari Extension
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build extension
+      run: npm run build
+    
+    - name: Test extension
+      run: npm test
+    
+    - name: Validate with Safari
+      run: |
+        xcrun safari-web-extension-converter --validate ./build/
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: safari-extension
+        path: build/
+
+  release:
+    if: github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Sync to GitLab
+      run: |
+        git remote add gitlab https://gitlab.com/opencode/safari-extension.git
+        git push gitlab main --force

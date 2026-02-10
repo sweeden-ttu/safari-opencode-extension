@@ -1,0 +1,24 @@
+{
+  "name": "safari-opencode-extension",
+  "version": "1.0.0",
+  "description": "Safari extension for OpenCode integration",
+  "scripts": {
+    "build": "./scripts/build.sh",
+    "build:js": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "test": "jest",
+    "test:accounts": "./scripts/test-accounts.sh",
+    "lint": "eslint src/",
+    "lint:md": "markdownlint *.md"
+  },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "jest": "^29.7.0",
+    "eslint": "^8.55.0",
+    "markdownlint-cli": "^0.37.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^0.4.0"
+  }
+}

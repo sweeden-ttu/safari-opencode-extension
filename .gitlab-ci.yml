@@ -1,0 +1,43 @@
+stages:
+  - sync
+  - build
+  - test
+  - deploy
+
+variables:
+  XCODE_VERSION: "14.0"
+
+sync_from_github:
+  stage: sync
+  script:
+    - git remote add github https://github.com/opencode/safari-extension.git
+    - git fetch github
+    - git merge github/main
+  only:
+    - schedules
+
+build_extension:
+  stage: build
+  image: macos-monterey
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 hour
+
+test_accounts:
+  stage: test
+  script:
+    - ./scripts/test-accounts.sh
+  dependencies:
+    - build_extension
+
+deploy_store:
+  stage: deploy
+  script:
+    - xcrun altool --upload-app --file build/safari-extension.pkg
+  only:
+    - main
+  when: manual
