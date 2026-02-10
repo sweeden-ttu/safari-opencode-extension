@@ -174,6 +174,34 @@ done
 
 MIT License - See LICENSE file for details
 
+## Rocky Linux 10 Dell Optimization
+
+### Disk I/O Optimization
+```bash
+# Fix sda transfer size alignment
+echo 4096 > /sys/block/sda/queue/optimal_io_size
+echo 4096 > /sys/block/sda/queue/minimum_io_size
+
+# Make persistent
+echo 'ACTION=="add|change", KERNEL=="sda", ATTR{queue/optimal_io_size}="4096"' > /etc/udev/rules.d/60-sda-optimization.rules
+udevadm control --reload-rules
+```
+
+### OLLAMA Removal
+```bash
+# Stop and remove OLLAMA
+systemctl stop ollama
+systemctl disable ollama
+rm -rf /usr/local/bin/ollama /usr/share/ollama ~/.ollama /var/lib/ollama
+rm -f /etc/systemd/system/ollama.service
+systemctl daemon-reload
+```
+
+### Automated Script
+```bash
+sudo ./scripts/optimize-rocky.sh
+```
+
 ## Development Workflow
 
 ### Build Commands
