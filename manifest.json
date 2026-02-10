@@ -2,35 +2,59 @@
   "manifest_version": 2,
   "name": "OpenCode Safari Extension",
   "version": "1.0.0",
-  "description": "Allows OpenCode to interact with web forms and download course content",
+  "description": "Enables AI agents to interact with web forms, download educational content, and process transcriptions through secure credential impersonation",
+  "author": "OpenCode Development Team",
+  "homepage_url": "https://github.com/opencode/safari-opencode-extension",
   
   "permissions": [
-    "activeTab",
-    "storage",
-    "downloads",
-    "webRequest",
-    "webRequestBlocking",
-    "https://*/*",
-    "http://*/*"
+    "activeTab",           // Access current browser tab for form interaction
+    "storage",             // Store LLM preferences and temporary session data
+    "downloads",           // Download course videos and transcription files
+    "webRequest",          // Monitor HTTP requests for credential extraction
+    "webRequestBlocking",  // Modify requests for authentication injection
+    "https://*/*",         // Universal HTTPS access for educational platforms
+    "http://*/*"           // HTTP access for legacy educational systems
   ],
   
   "background": {
     "scripts": ["background.js"],
-    "persistent": false
+    "persistent": false     // Non-persistent for better performance and security
   },
   
   "content_scripts": [{
     "matches": ["<all_urls>"],
     "js": ["content.js"],
-    "run_at": "document_end"
+    "run_at": "document_end",  // Execute after DOM is fully loaded
+    "all_frames": true         // Include iframes for embedded content
   }],
   
   "browser_action": {
     "default_popup": "popup/popup.html",
-    "default_title": "OpenCode Extension"
+    "default_title": "OpenCode Extension - Select LLM Providers",
+    "default_icon": {
+      "16": "assets/icon-16.png",
+      "32": "assets/icon-32.png",
+      "48": "assets/icon-48.png",
+      "128": "assets/icon-128.png"
+    }
   },
   
   "web_accessible_resources": [
-    "assets/*"
-  ]
+    "assets/*",              // Extension icons and UI assets
+    "popup/popup.css"        // Popup styling accessible to content scripts
+  ],
+  
+  "content_security_policy": "script-src 'self'; object-src 'self'",
+  
+  "externally_connectable": {
+    "matches": [
+      "https://*.canvas.instructure.com/*",  // Canvas LMS
+      "https://*.blackboard.com/*",          // Blackboard Learn
+      "https://*.moodle.org/*",              // Moodle
+      "https://*.coursera.org/*",            // Coursera
+      "https://*.edx.org/*",                 // edX
+      "https://*.udemy.com/*",               // Udemy
+      "https://*.khanacademy.org/*"          // Khan Academy
+    ]
+  }
 }
